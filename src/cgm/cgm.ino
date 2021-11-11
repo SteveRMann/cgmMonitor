@@ -76,6 +76,14 @@
 
 
 
+//--------------- timeObj declarations ---------------
+#include <dlay.h>
+const long int SECONDS = 1000;        //ms per second
+int rssiTime = 15 * SECONDS;          //How often to publish RSSI
+dlay rssiTimer(rssiTime, true);       //How often in ms to publish RSSI
+//--------------- end timeObj declarations ---------------
+
+
 #include <Ticker.h>
 Ticker staleTicker;                   //Ticker object for the stale ticker flag.
 
@@ -93,6 +101,7 @@ Ticker staleTicker;                   //Ticker object for the stale ticker flag.
 const char *connectName =  NODENAME "-workshop";             //Must be unique
 const char *statusTopic = NODENAME "/status";
 const char *cmndTopic = NODENAME "/cmnd";
+const char *rssiTopic = NODENAME "/rssi";
 const char *bgTopic = NODENAME "/bg";
 const char *trendTopic = NODENAME "/trend";
 const char *dateTopic = NODENAME "/date";               // Sent as dateString from Node Red
@@ -193,7 +202,7 @@ void setup() {
   //digitalWrite(alarmPin, LOW);
 
   setup_wifi();
-  start_OTA();                            
+  start_OTA();
 
   client.setServer(MQTT_SERVER, 1883);    //Server details for pubsub.
   client.setCallback(callback);
@@ -203,8 +212,10 @@ void setup() {
   Serial.println(NODENAME);
   Serial.print(F("Unique MQTT Connect name = "));
   Serial.println(connectName);
-  Serial.print(F("ststusTopic= "));
+  Serial.print(F("statusTopic= "));
   Serial.println((String(statusTopic)));
+  Serial.print(F("rssiTopic= "));
+  Serial.println((String(rssiTopic)));
   Serial.print(F("connectName= "));
   Serial.println((String(connectName)));
   Serial.print(F("bgTopic= "));
@@ -245,6 +256,8 @@ void setup() {
 /* ***************************************** LOOP ***************************************** */
 void loop() {
   ArduinoOTA.handle();
+
+  if (rssiTimer.ding()) publishRssi();
 
   //Re-connect the pubsub client to the mqtt broker
   if (!client.connected()) {

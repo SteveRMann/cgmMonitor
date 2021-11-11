@@ -22,3 +22,21 @@ void beginSerial() {
   Serial.println();
   delay(2500);
 }
+
+
+
+void publishRssi() {
+  rssiTimer.stop();
+  long myRssi;
+  String rssi_str;
+  char temp[50];
+  myRssi = WiFi.RSSI();                               //RSSI rturns a long int.
+  rssi_str = String(myRssi);                          //Convert myRssi to a string
+  rssi_str.toCharArray(temp, rssi_str.length() + 1);  //packaging up the data to publish to mqtt
+  Serial.print(F("====="));
+  Serial.print(F("RSSI: "));
+  Serial.print(temp);
+  Serial.println(F("====="));
+  client.publish(rssiTopic, temp);
+  rssiTimer.start();
+}
