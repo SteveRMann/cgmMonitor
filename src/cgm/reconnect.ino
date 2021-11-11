@@ -36,10 +36,6 @@ void reconnect() {
       Serial.print(F("Subscribing to "));
       Serial.println(brightTopic);
 
-      //client.subscribe(alarmTopic);
-      //Serial.print(F("Subscribing to "));
-      //Serial.println(alarmTopic);
-
       Serial.println(F("====================="));
 
     } else {

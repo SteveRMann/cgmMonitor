@@ -10,6 +10,8 @@ void dbugs(const char *s, const char *v) {
 }
 
 
+
+// ********** Initialize the serial port **********
 void beginSerial() {
   Serial.begin(115200);
   delay(1);
@@ -25,6 +27,7 @@ void beginSerial() {
 
 
 
+// ********** Function to publish RSSI over MQTT **********
 void publishRssi() {
   rssiTimer.stop();
   long myRssi;
@@ -39,4 +42,13 @@ void publishRssi() {
   Serial.println(F("====="));
   client.publish(rssiTopic, temp);
   rssiTimer.start();
+}
+
+
+
+// ********** Callback Function to display "Stale Data" **********
+void staleTick()
+{
+  staleFlag = true;
+  Serial.println(F("Staleflag set"));
 }

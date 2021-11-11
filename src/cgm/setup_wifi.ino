@@ -31,6 +31,8 @@ void setup_wifi() {
     Serial.print(WiFi.status()); Serial.print(F(" "));
     tryCount += 1;
     if (tryCount % 10 == 0)Serial.println();
+    digitalWrite(ledPin, !digitalRead(ledPin));
+    
   }
   Serial.println(F("\nWiFi connected, "));
   Serial.print(F("MAC Address: "));

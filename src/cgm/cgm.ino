@@ -87,8 +87,7 @@ const char *trendTopic = NODENAME "/trend";
 const char *dateTopic = NODENAME "/date";               // Sent as dateString from Node Red
 const char *timeTopic = NODENAME "/time";               // Time from Node-Red, hh:mm every ten seconds.
 const char *brightTopic = NODENAME "/bright";           // Allows the setting of the display brightness
-//const char *alarmTopic = NODENAME "/alarm";
-//const char *muteTopic = NODENAME "/mute";
+
 //String lastTime = "";                                   //Last time displayed
 
 
@@ -100,8 +99,7 @@ char hostName[12];        // Holds hostNamePrefix + the last three bytes of the 
 
 //---------------- GPIO ------------------------------
 const int ledPin = D5;
-//const int alarmPin = 13;       // D7 It's on the PCB, but not used.
-//const int netLedPin = D4;      // D4 (GPIO2 Built-In LED)
+
 
 
 
@@ -125,8 +123,6 @@ const int staleTime = 600;            // Number of seconds in ten minutes.
 String sensorDate;
 String lastSensorDate;                // The last sendor date.  If this is unchanged after ten minutes, then the data is stale.
 bool staleFlag = false;               // Flag is set if no new sensor data is received in ten minutes
-String alarm = "off";
-
 byte brightness = 5;                  // Display brightness, initially dim
 
 
@@ -146,8 +142,8 @@ Adafruit_AlphaNum4 timeDisplay = Adafruit_AlphaNum4();
 
 // ************* Initialize the espClient ***********************
 // Initializes the espClient. The espClient name must be unique
-WiFiClient espCGM_kitchen;
-PubSubClient client(espCGM_kitchen);
+WiFiClient espCGM_Office;
+PubSubClient client(espCGM_Office);
 
 /*
    /MAC Addresses:
@@ -159,12 +155,6 @@ PubSubClient client(espCGM_kitchen);
 */
 
 
-// *********************  Callback Function to display the "Stale Data" symbol *********************
-void staleTick()
-{
-  staleFlag = true;
-  Serial.println(F("Staleflag set"));
-}
 
 
 
@@ -172,14 +162,8 @@ void staleTick()
 void setup() {
   beginSerial();
 
-  //pinMode(netLedPin, OUTPUT);             // netLedPin is an indicator that a network connection is made.
-  //digitalWrite(netLedPin, ledOFF);
-
   pinMode(ledPin, OUTPUT);                  // LedPin is an indicator that an MQTT message was received.
   digitalWrite(ledPin, ledOFF);
-
-  //pinMode(alarmPin, OUTPUT);              // AlarmPin is connected to the audible alarm.
-  //digitalWrite(alarmPin, LOW);
 
   setup_wifi();
   start_OTA();
