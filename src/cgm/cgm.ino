@@ -1,5 +1,5 @@
 #define SKETCH "cgm.ino"
-#define VERSION "3.20"           // Four characters
+#define VERSION "3.30"           // Four characters
 #define hostPrefix "CGM-"        // Six characters max
 
 /*****
