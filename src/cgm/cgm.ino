@@ -4,26 +4,9 @@
 
 /*****
 
-  D:\River Documents\Arduino\Arduino Projects\CGM\cgm-wemos2\cgm-wemos2.ino
-  04/23/2019 - Added second display, clone of cgm-Wemos2.ino
-  04/30/2019 - This version is an attempt to get the local time to show in the second display as HH:MM.
-  04/30/2019 - Flicker was fixed with 47uF caps on the display backpacks
-  05/06/2019 - clone from Version 2c, but fixed the time format in Node Red
-  05/24/2019 - Added #define sketchName
-  Version 2
-    6/27/2019 - Introduced to github.
-                Added WiFi.enableInsecureWEP(); before WiFi.begin(ssid, password);
-  Version 2.1
-    02/12/2020 - Removed button handlers
-    02/12/2020 - Lots of changes.
-                 Added OTA and a unique hostname using the MAC address.
-  Version 2.11
-    04/23/2020 - Changed LED pin# to match the PCB.
-  Version 3.00
-    04/24/2020 - Reboot if the time is not updated in 2 minutes.
-  Version 3.10
-    06/24/2020 - Added topic: cgm/cmnd, message: REBOOT to reboot all nodes.
+  Github Repository local location: E:\cgmMonitor
 
+  Version 3.30 (11/10/21) Added rssi display on startup
 
 **PROBLEMS**
   I am using millis to test for stale data timeout, but the code also includes the ticker.h library.
@@ -32,9 +15,6 @@
   IDE settings:
     NodeMCU 1.0 (ESP-12E Module), 4M, 1M SPIFFS
     Wemos D1 R1 Mini
-
-  The CGM portion of this sketch runs equally on NodeMCU and Wemos D1 Mini.
-  The button functions have not been tested on the Wemos and lightly tested on the NodeMCU.
 
   ---------------------------------------------------------------------------
   The CGM data comes from a Node-Red flow.  A 'poll state' node reads the sensor.yaml 'platform:rest' which gets my CGM data from
@@ -241,6 +221,8 @@ void setup() {
   //  showLetters();            // Show all letters.
   showVersion();                // Show the software Version number
   showMac();                    // Show the last two byte-pairs of the MAC address.
+  showRssi();                   // Show the RSSI
+  
   delay(1000);
   timeDisplay.clear();
   timeDisplay.writeDisplay();
