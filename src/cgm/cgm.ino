@@ -1,6 +1,8 @@
 #define SKETCH "cgm.ino"
 #define VERSION "3.31"           // Four characters
 #define hostPrefix "CGM-"        // Six characters max
+        
+
 
 /*****
 
@@ -48,11 +50,11 @@
 
 
 // ****************************** Includes  ******************************
+#include <ArduinoOTA.h>
 #include "ESP8266WiFi.h"
 #include <PubSubClient.h>
 #include <TimeLib.h>
 //#include <Time.h>
-#include <ArduinoOTA.h>
 #include "Kaywinnet.h"
 
 
@@ -79,7 +81,6 @@ Ticker staleTicker;                   //Ticker object for the stale ticker flag.
 
 // ****************************** Globals  ******************************
 #define NODENAME "cgm"
-const char *connectName =  NODENAME "-workshop";             //Must be unique
 const char *statusTopic = NODENAME "/status";
 const char *cmndTopic = NODENAME "/cmnd";
 const char *rssiTopic = NODENAME "/rssi";
@@ -100,6 +101,7 @@ char hostName[12];        // Holds hostNamePrefix + the last three bytes of the 
 
 //---------------- GPIO ------------------------------
 const int ledPin = D5;
+#define LEDPIN            //When defined, the LED is flashed while WiFi is connecting.
 
 
 

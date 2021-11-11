@@ -6,7 +6,6 @@ void reconnect() {
     Serial.print(F("Attempting MQTT connection..."));
 
     // Attempt to connect
-    //if (client.connect(connectName))
     if (client.connect(hostName))
     {
       Serial.println(F("connected"));

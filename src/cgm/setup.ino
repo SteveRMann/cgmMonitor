@@ -15,14 +15,10 @@ void setup() {
   Serial.println("...............");
   Serial.print(F("Node name= "));
   Serial.println(NODENAME);
-  Serial.print(F("Unique MQTT Connect name = "));
-  Serial.println(connectName);
   Serial.print(F("statusTopic= "));
   Serial.println((String(statusTopic)));
   Serial.print(F("rssiTopic= "));
   Serial.println((String(rssiTopic)));
-  Serial.print(F("connectName= "));
-  Serial.println((String(connectName)));
   Serial.print(F("bgTopic= "));
   Serial.println((String(bgTopic)));
   Serial.print(F("trendTopic= "));

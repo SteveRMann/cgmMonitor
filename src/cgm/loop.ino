@@ -9,7 +9,6 @@ void loop() {
     reconnect();
   }
   if (!client.loop()) {
-    //client.connect(connectName);
     client.connect(hostName);
   }
 
