@@ -33,7 +33,6 @@ void setup_wifi() {
     if (tryCount % 10 == 0)Serial.println();
 #ifdef LEDPIN
     digitalWrite(ledPin, !digitalRead(ledPin));
-    Serial.println(F("blink"));
 #endif
   }
   Serial.println(F("\nWiFi connected, "));
