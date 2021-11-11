@@ -25,7 +25,6 @@ void showRssi() {
   //we only need the second and third characters.
 
   //Show the "-" in position 0
-  //bgDisplay.writeDigitRaw(0, segN + segJ);
   bgDisplay.writeDigitAscii(0, '-');
   
 
