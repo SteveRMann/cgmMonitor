@@ -6,7 +6,7 @@
   Make sure you include at the start of the sketch:
   #define hostPrefix "CGM-"
   #include "ESP8266WiFi.h"   // Not needed if also using the Arduino OTA Library...
-  #include "D:\River Documents\Arduino\libraries\Kaywinnet.h"  \\ WiFi credentials
+  #include "Kaywinnet.h"     // WiFi credentials
 
   If using the OTA Library, put these at the start of the sketch.
   char macBuffer[24];       // Holds the last three digits of the MAC, in hex.
@@ -19,13 +19,14 @@ void setup_wifi() {
   int tryCount = 0;                 //Count the attempts to connect
 
   Serial.println(F("\n"));
-  Serial.print(F("Connecting to "));
-  Serial.println(MY_SSID);
+  Serial.println(F("Connecting to WiFi"));
 
-
+  // Don't save WiFi configuration in flash - optional
+  WiFi.persistent(false);
+  
   WiFi.mode(WIFI_STA);
   //WiFi.enableInsecureWEP();
-  WiFi.begin(MY_SSID, MY_PASSWORD);
+  WiFi.begin("Serenity", SERENITYPASSWORD);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(WiFi.status()); Serial.print(F(" "));
@@ -35,7 +36,8 @@ void setup_wifi() {
     digitalWrite(ledPin, !digitalRead(ledPin));
 #endif
   }
-  Serial.println(F("\nWiFi connected, "));
+  Serial.print(F("\nWiFi connected to "));
+  Serial.println(WiFi.SSID());
   Serial.print(F("MAC Address: "));
   Serial.println(WiFi.macAddress());
   Serial.print(F("IP address: "));
