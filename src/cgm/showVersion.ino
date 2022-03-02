@@ -6,13 +6,13 @@ void showVersion() {
   int versionChars = sizeof(version) / sizeof(version[0]);
   versionChars = versionChars - 1;                          // Remove one for the line end.
   
-  Serial.println(F("__________________"));
-  Serial.print(F("version[] = '"));
-  Serial.print(version);
-  Serial.println(F("'"));
-  Serial.print(F("versionChars = "));
-  Serial.println(versionChars);
-  Serial.println(F("__________________"));
+  //Serial.println(F("__________________"));
+  //Serial.print(F("version[] = '"));
+  //Serial.print(version);
+  //Serial.println(F("'"));
+  //Serial.print(F("versionChars = "));
+  //Serial.println(versionChars);
+  //Serial.println(F("__________________"));
 
 
 

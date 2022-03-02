@@ -1,5 +1,5 @@
 #define SKETCH "cgm.ino"
-#define VERSION "3.31"           // Four characters
+#define VERSION "4.00"           // Four characters
 #define hostPrefix "CGM-"        // Six characters max
         
 
@@ -10,6 +10,7 @@
 
   Version 3.30 (11/10/21) Added rssi display on startup
   Version 3.31 (11/11/21) Moved functions from the main ino file
+  Version 4.00 (03/01/22) Changed WiFi to WiFiMulti
 
 **PROBLEMS**
   I am using millis to test for stale data timeout, but the code also includes the ticker.h library.
@@ -51,12 +52,18 @@
 
 // ****************************** Includes  ******************************
 #include <ArduinoOTA.h>
-#include "ESP8266WiFi.h"
+#include <ESP8266WiFiMulti.h>
+//#include "ESP8266WiFi.h"
 #include <PubSubClient.h>
 #include <TimeLib.h>
 //#include <Time.h>
 #include "Kaywinnet.h"
 
+//--------------- WiFiMulti declarations ---------------
+ESP8266WiFiMulti wifiMulti;
+
+// WiFi connect timeout per AP. Increase when connecting takes longer.
+const uint32_t connectTimeoutMs = 5000;
 
 
 //--------------- timeObj declarations ---------------
@@ -143,8 +150,8 @@ Adafruit_AlphaNum4 timeDisplay = Adafruit_AlphaNum4();
 
 // ************* Initialize the espClient ***********************
 // Initializes the espClient. The espClient name must be unique
-WiFiClient espCGM_Kitchen;
-PubSubClient client(espCGM_Kitchen);
+WiFiClient espCGM_0C6E00;
+PubSubClient client(espCGM_0C6E00);
 
 /*
    /MAC Addresses:
@@ -152,5 +159,5 @@ PubSubClient client(espCGM_Kitchen);
    5B668A  Office
    ADA75B  MBR
    0C6E00  FamilyRoom
-   69789C  Workshop
+   69789C  Desktop
 */

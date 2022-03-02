@@ -6,7 +6,8 @@ void setup() {
   pinMode(ledPin, OUTPUT);                  // LedPin is an indicator that an MQTT message was received.
   digitalWrite(ledPin, ledOFF);
 
-  setup_wifi();
+  //  setup_wifi();
+  setup_wifiMulti();
   start_OTA();
 
   client.setServer(MQTT_SERVER, 1883);    //Server details for pubsub.
@@ -41,9 +42,10 @@ void setup() {
   //  showNumbers();            // Show the digits, 0-9
   //  showLetters();            // Show all letters.
   showVersion();                // Show the software Version number
+  showSSID();                   // Show the connected SSID
   showMac();                    // Show the last two byte-pairs of the MAC address.
   showRssi();                   // Show the RSSI
-  
+
   delay(1000);
   timeDisplay.clear();
   timeDisplay.writeDisplay();

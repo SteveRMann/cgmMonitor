@@ -6,13 +6,13 @@ void showRssi() {
   char rssiStr[16];
   itoa(rssi, rssiStr, 10);
 
-  Serial.print(F("RSSI = '"));
-  Serial.print(rssi);
-  Serial.println(F("'"));
+  //Serial.print(F("RSSI = '"));
+  //Serial.print(rssi);
+  //Serial.println(F("'"));
 
-  Serial.print(F("rssiStr= '"));
-  Serial.print (rssiStr);
-  Serial.println(F("'"));
+  //Serial.print(F("rssiStr= '"));
+  //Serial.print (rssiStr);
+  //Serial.println(F("'"));
 
 
   timeDisplay.writeDigitRaw(0, letterR);
