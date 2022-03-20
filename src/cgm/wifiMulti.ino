@@ -10,9 +10,14 @@ void setup_wifiMulti() {
   WiFi.mode(WIFI_STA);
 
   // Register multi WiFi networks
-  wifiMulti.addAP(MYSSID, MYPASSWORD);
+  // Defined in kaywinnet.h
+#ifndef Kaywinnet
+#include "Kaywinnet.h"
+#endif
   wifiMulti.addAP("Naboo", NABOOPASSWORD);
   wifiMulti.addAP("Serenity", SERENITYPASSWORD);
+  wifiMulti.addAP("Miranda", MIRANDAPASSWORD);
+  wifiMulti.addAP("Kaywinnet", KAYWINNETPASSWORD);
 
   if (wifiMulti.run(connectTimeoutMs) == WL_CONNECTED) {
     Serial.print(F("WiFi connected: "));

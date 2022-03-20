@@ -1,7 +1,15 @@
 #define SKETCH "cgm.ino"
-#define VERSION "4.00"           // Four characters
+#define VERSION "4.01"           // Four characters
 #define hostPrefix "CGM-"        // Six characters max
-        
+
+// The espClient name must be unique. Uncomment one
+// Make sure the same port is selected in tools.
+// MAC Addresses:
+//#define Mac0C6E00  //FamilyRoom
+//#define Mac5B668A  //Office
+//#define Mac69789C  //Desktop
+#define MacADA75B  //MBR
+//#define MacD010E9  //Kitchen ??
 
 
 /*****
@@ -11,6 +19,7 @@
   Version 3.30 (11/10/21) Added rssi display on startup
   Version 3.31 (11/11/21) Moved functions from the main ino file
   Version 4.00 (03/01/22) Changed WiFi to WiFiMulti
+  Version 4.01 (03/20/22) Added 'miranda' to WiFimulti
 
 **PROBLEMS**
   I am using millis to test for stale data timeout, but the code also includes the ticker.h library.
@@ -64,6 +73,8 @@ ESP8266WiFiMulti wifiMulti;
 
 // WiFi connect timeout per AP. Increase when connecting takes longer.
 const uint32_t connectTimeoutMs = 5000;
+
+
 
 
 //--------------- timeObj declarations ---------------
@@ -150,8 +161,30 @@ Adafruit_AlphaNum4 timeDisplay = Adafruit_AlphaNum4();
 
 // ************* Initialize the espClient ***********************
 // Initializes the espClient. The espClient name must be unique
-WiFiClient espCGM_0C6E00;
-PubSubClient client(espCGM_0C6E00);
+#ifdef MacD010E9 //Kitchen
+WiFiClient espCGM_10E9;
+PubSubClient client(espCGM_10E9);
+#endif
+
+#ifdef Mac5B668A  //Office
+WiFiClient espCGM_668A;
+PubSubClient client(espCGM_668A);
+#endif
+
+#ifdef MacADA75B  //MBR
+WiFiClient espCGM_A75B;
+PubSubClient client(espCGM_A75B);
+#endif
+
+#ifdef Mac0C6E00  //FamilyRoom
+WiFiClient espCGM_6E00;
+PubSubClient client(espCGM_6E00);
+#endif
+
+#ifdef Mac69789C  //Desktop
+WiFiClient espCGM_789C;
+PubSubClient client(espCGM_789C);
+#endif
 
 /*
    /MAC Addresses:

@@ -5,17 +5,21 @@ void showSSID() {
   char ssid[16];
   WiFi.SSID().toCharArray(ssid, 16);
 
-  int ssidChars = sizeof(ssid) / sizeof(ssid[0]);
+  //int ssidChars = sizeof(ssid) / sizeof(ssid[0]);
   //ssidChars = ssidChars - 1;                          // Remove one for the line end.
 
   Serial.println(F("__________________"));
   Serial.print(F("ssid[] = '"));
   Serial.print(ssid);
   Serial.println(F("'"));
-  Serial.print(F("ssidChars = "));
-  Serial.println(ssidChars);
+  //Serial.print(F("ssidChars = "));
+  //Serial.println(ssidChars);
   Serial.println(F("__________________"));
 
+  // Clean up SSID display
+  if (!isAlphaNumeric(ssid[7])) {
+    ssid[7] = 32;
+  }
 
   timeDisplay.writeDigitAscii(0, ssid[0]);
   timeDisplay.writeDigitAscii(1, ssid[1]);
