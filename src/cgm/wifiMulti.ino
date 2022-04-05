@@ -1,4 +1,24 @@
 void setup_wifiMulti() {
+  /*
+    In the main program, include:
+      //--------------- WiFiMulti declarations ---------------
+      #include <ESP8266WiFiMulti.h>
+      ESP8266WiFiMulti wifiMulti;
+      
+      // WiFi connect timeout per AP. Increase when connecting takes longer.
+      const uint32_t connectTimeoutMs = 5000;
+
+      // setup_wifi vars
+      char macBuffer[24];       // Holds the last three digits of the MAC, in hex.
+      char hostNamePrefix[] = hostPrefix;
+      char hostName[12];        // Holds hostNamePrefix + the last three bytes of the MAC address.
+
+    And in setup:
+      setup_wifiMulti();
+  */
+
+  const uint32_t connectTimeoutMs = 5000;
+  * /
   byte mac[6];                      //// the MAC address of your Wifi shield
 
   Serial.println(F("Connecting to WiFi"));
