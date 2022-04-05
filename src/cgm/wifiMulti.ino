@@ -18,7 +18,6 @@ void setup_wifiMulti() {
   */
 
   const uint32_t connectTimeoutMs = 5000;
-  * /
   byte mac[6];                      //// the MAC address of your Wifi shield
 
   Serial.println(F("Connecting to WiFi"));
