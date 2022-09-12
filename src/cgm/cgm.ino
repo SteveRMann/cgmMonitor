@@ -8,8 +8,8 @@
 //#define Mac0C6E00  //FamilyRoom
 //#define Mac5B668A  //Office
 //#define Mac69789C  //Desktop
-#define MacADA75B  //MBR
-//#define MacD010E9  //Kitchen ??
+//#define MacADA75B  //MBR
+#define MacD010E9    //Workshop
 
 
 /*****

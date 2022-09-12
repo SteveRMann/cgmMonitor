@@ -4,7 +4,7 @@ void setup_wifiMulti() {
       //--------------- WiFiMulti declarations ---------------
       #include <ESP8266WiFiMulti.h>
       ESP8266WiFiMulti wifiMulti;
-      
+
       // WiFi connect timeout per AP. Increase when connecting takes longer.
       const uint32_t connectTimeoutMs = 5000;
 
@@ -33,10 +33,10 @@ void setup_wifiMulti() {
 #ifndef Kaywinnet
 #include "Kaywinnet.h"
 #endif
-  wifiMulti.addAP("Naboo", NABOOPASSWORD);
-  wifiMulti.addAP("Serenity", SERENITYPASSWORD);
-  wifiMulti.addAP("Miranda", MIRANDAPASSWORD);
-  wifiMulti.addAP("Kaywinnet", KAYWINNETPASSWORD);
+  wifiMulti.addAP("Naboo", NABOO_PASSWORD);
+  wifiMulti.addAP("Serenity", SERENITY_PASSWORD);
+  wifiMulti.addAP("Miranda", MIRANDA_PASSWORD);
+  wifiMulti.addAP("Kaywinnet", KAYWINNET_PASSWORD);
 
   if (wifiMulti.run(connectTimeoutMs) == WL_CONNECTED) {
     Serial.print(F("WiFi connected: "));
@@ -52,6 +52,22 @@ void setup_wifiMulti() {
     Serial.println(rssi);
   } else {
     Serial.println(F("WiFi not connected!"));
+    //showNoWifi();
+    timeDisplay.writeDigitRaw(0, letterN);
+    timeDisplay.writeDigitRaw(1, letterO);
+    timeDisplay.writeDigitRaw(2, 0x0);
+    timeDisplay.writeDigitRaw(3, 0x0);
+    timeDisplay.writeDisplay();
+
+    bgDisplay.writeDigitRaw(0, letterW);
+    bgDisplay.writeDigitRaw(1, letterI);
+    bgDisplay.writeDigitRaw(2, letterF);
+    bgDisplay.writeDigitRaw(3, letterI);
+    bgDisplay.writeDisplay();
+
+    delay(2500);
+
+
   }
 
 
