@@ -1,5 +1,5 @@
 #define SKETCH "cgm.ino"
-#define VERSION "4.01"           // Four characters
+#define VERSION "4.20"           // Four characters
 #define hostPrefix "CGM-"        // Six characters max
 
 // The espClient name must be unique. Uncomment one
@@ -7,9 +7,9 @@
 // MAC Addresses:
 //#define Mac0C6E00  //FamilyRoom
 //#define Mac5B668A  //Office
-//#define Mac69789C  //Desktop
+#define Mac69789C  //Desktop
 //#define MacADA75B  //MBR
-#define MacD010E9    //Workshop
+//#define MacD010E9    //Workshop
 
 
 /*****
@@ -20,6 +20,7 @@
   Version 3.31 (11/11/21) Moved functions from the main ino file
   Version 4.00 (03/01/22) Changed WiFi to WiFiMulti
   Version 4.01 (03/20/22) Added 'miranda' to WiFimulti
+  Version 4.20 (12/20/22) Added test to setup_wifiMulti (success or fail)
 
 **PROBLEMS**
   I am using millis to test for stale data timeout, but the code also includes the ticker.h library.

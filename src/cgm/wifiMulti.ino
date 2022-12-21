@@ -1,4 +1,4 @@
-void setup_wifiMulti() {
+int setup_wifiMulti() {
   /*
     In the main program, include:
       //--------------- WiFiMulti declarations ---------------
@@ -64,10 +64,9 @@ void setup_wifiMulti() {
     bgDisplay.writeDigitRaw(2, letterF);
     bgDisplay.writeDigitRaw(3, letterI);
     bgDisplay.writeDisplay();
-
     delay(2500);
 
-
+    return 1;
   }
 
 
@@ -84,4 +83,5 @@ void setup_wifiMulti() {
   //Serial.print(hostName);
   //Serial.println(F("\""));
 
+  return 0;
 }

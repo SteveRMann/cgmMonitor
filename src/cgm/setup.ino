@@ -1,13 +1,18 @@
 
 // **************************************** SETUP *************************************
 void setup() {
+  int rc;
   beginSerial();
 
   pinMode(ledPin, OUTPUT);                  // LedPin is an indicator that an MQTT message was received.
   digitalWrite(ledPin, ledOFF);
 
   //  setup_wifi();
-  setup_wifiMulti();
+  rc = setup_wifiMulti();
+  while (rc > 0) {
+    Serial.println(F("setup_wifimulti failed"));
+    rc = setup_wifiMulti();
+  };
   start_OTA();
 
   client.setServer(MQTT_SERVER, 1883);    //Server details for pubsub.
