@@ -1,5 +1,5 @@
 // ******** dbugs ********
-// Function to display a string for debugging. 
+// Function to display a string for debugging.
 void dbugs(const char *s, const char *v) {
   //Show a string variable. Enter with the string description and the string.
   //Example dbugs("My String= ",myString);
@@ -51,4 +51,11 @@ void staleTick()
 {
   staleFlag = true;
   Serial.println(F("Staleflag set"));
+}
+
+void restartStaleTimer() {
+  lastSensorDate = sensorDate;          // Save the new sensor date and
+  staleFlag = false;                    // Clear the stale flag if it's on.
+  staleTicker.detach();                 // Restart the stale timer
+  staleTicker.attach(120, staleTick);   // Call the staleTick function after two minutes.
 }

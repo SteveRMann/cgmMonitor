@@ -40,6 +40,7 @@ void callback(String topic, byte * message, unsigned int length) {
 
 
   if (topic == timeTopic) {
+    restartStaleTimer();
     //Time from Node Red is always 5 characters.
     //For example: "12:34" or "01:05"
     //Add the decimal point to the second digit since the display doesn't have a colon.
@@ -84,8 +85,6 @@ void callback(String topic, byte * message, unsigned int length) {
     timeDisplay.writeDigitAscii(3, message[4]);
     timeDisplay.writeDisplay();
 
-    // Clear staleFlag here???
-
     //Start the time timeout. If no time message arrives in crashTimeout seconds, then reboot the ESP.
     //This is different from the staleTimer that tracks only if no new BG data is received.
     crashTimer = now();
@@ -94,9 +93,8 @@ void callback(String topic, byte * message, unsigned int length) {
 
 
 
-
-
   if (topic == brightTopic) {
+    restartStaleTimer();
     brightness = messageString.toInt();
     timeDisplay.setBrightness(brightness);
     bgDisplay.setBrightness(brightness);
@@ -104,6 +102,7 @@ void callback(String topic, byte * message, unsigned int length) {
 
 
   if (topic == dateTopic) {
+    restartStaleTimer();
     sensorDate = messageString;
     Serial.print (F("Date= "));
     Serial.println(sensorDate);
@@ -114,16 +113,12 @@ void callback(String topic, byte * message, unsigned int length) {
       Serial.println(lastSensorDate);
       Serial.print(F("SensorDate= "));
       Serial.println(sensorDate);
-
-      lastSensorDate = sensorDate;          // Yes, save the new sensor date and
-      staleFlag = false;                    // Clear the stale flag, if it's on.
-      staleTicker.detach();                 // Restart the stale timer
-      staleTicker.attach(600, staleTick);   // Call the staleTick function after ten minutes.
     }
   }
 
 
   if (topic == bgTopic) {
+    restartStaleTimer();
     //What we really want to do is display the msg on the HT16K33 I2C display.
     //Format the array, right-justified, leading spaces, but leaving the rightmost display character empty.
     //for trend up/down arrows.
@@ -153,10 +148,7 @@ void callback(String topic, byte * message, unsigned int length) {
       bgDisplay.writeDigitAscii(2, '?');
       bgDisplay.writeDisplay();
     }
-    if (staleFlag) {                            //?? Needed here?  This is in loop.
-      bgDisplay.writeDigitAscii(3, '*');
-      bgDisplay.writeDisplay();
-    }       //if staleflag
+
 
     bgTimestamp = now();                  // Used to flag if more than staleTime without a bg read has elapsed.
     // now() is giving you UNIX time in seconds.
@@ -164,13 +156,14 @@ void callback(String topic, byte * message, unsigned int length) {
     // Reset the stale data timer
     staleFlag = false;                    // Clear the stale flag, if it's on.
     staleTicker.detach();                 // Restart the stale timer
-    staleTicker.attach(600, staleTick);   // Call the staleTick function after ten minutes.
+    staleTicker.attach(120, staleTick);   // Call the staleTick function after two minutes.
 
   }         //if topic==bgtopic
 
 
 
   if (topic == trendTopic) {
+    restartStaleTimer();
     Serial.print(F("trendTopic:messageString= "));
     Serial.println(messageString);
     switch (messageString.toInt())
@@ -208,11 +201,6 @@ void callback(String topic, byte * message, unsigned int length) {
     bgDisplay.writeDigitRaw(3, digit3);
     bgDisplay.writeDisplay();
 
-
-    ///if (staleFlag) {                      //Override the last displayed state
-    ///bgDisplay.writeDigitAscii(3, '*');  //?? Needed here? Already in loop
-    ///bgDisplay.writeDisplay();
-    ///}       //if staleflag
 
   }         //if topic==trendtopic
 }           //callback

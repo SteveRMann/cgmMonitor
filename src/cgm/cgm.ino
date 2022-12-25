@@ -141,10 +141,10 @@ int crashTimer;                       // Used to reboot if no new time value is 
 unsigned long crashTimeout = 120;     // How long to wait for new data before rebooting, in seconds.
 
 int bgTimestamp = 0;                  // Used to detect if bg reading is not received in ten minutes
-const int staleTime = 600;            // Number of seconds in ten minutes.
+const int staleTime = 120;            // Number of seconds in two minutes.
 String sensorDate;
 String lastSensorDate;                // The last sendor date.  If this is unchanged after ten minutes, then the data is stale.
-bool staleFlag = false;               // Flag is set if no new sensor data is received in ten minutes
+bool staleFlag = false;               // Flag is set if no new sensor data is received in two minutes
 byte brightness = 5;                  // Display brightness, initially dim
 
 

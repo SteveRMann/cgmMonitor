@@ -20,10 +20,18 @@ void loop() {
     ESP.restart();
   }
 
+  //staleFlag is set if the stale tick timer times out
+  if (staleFlag) ESP.reset();
+
+
+
+/*
   if (now() - bgTimestamp > staleTime) {    //If the BG reading is stale..
+    Serial.println(F("DEBUG- staleTime timeout"));
     bgDisplay.writeDigitAscii(3, '*');
     bgDisplay.writeDisplay();
   }
+*/
 
   //Now, we just wait for a callback
 
