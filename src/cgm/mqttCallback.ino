@@ -8,9 +8,9 @@ void callback(String topic, byte * message, unsigned int length) {
   digitalWrite(ledPin, ledON);          //Turn on LED and start timing it.
   ledMillis = millis();
 
-  Serial.println();
-  Serial.print(F("Message arrived on topic: "));
-  Serial.println(topic);
+  ///Serial.println();
+  ///Serial.print(F("Message arrived on topic: "));
+  ///Serial.println(topic);
 
 
   // Convert the character array to a string
@@ -22,9 +22,9 @@ void callback(String topic, byte * message, unsigned int length) {
   messageString.toUpperCase();          //Make the string upper-case
 
 
-  Serial.print("messageString: ");
-  Serial.print(messageString);
-  Serial.println();
+  ///Serial.print("messageString: ");
+  ///Serial.print(messageString);
+  ///Serial.println();
   //Serial.print(F("Length= "));
   //Serial.print(length);
   //Serial.println();
@@ -101,20 +101,22 @@ void callback(String topic, byte * message, unsigned int length) {
   }
 
 
-  if (topic == dateTopic) {
-    restartStaleTimer();
-    sensorDate = messageString;
-    Serial.print (F("Date= "));
-    Serial.println(sensorDate);
-
-    if (sensorDate != lastSensorDate) {     // New date?
-      Serial.print(F("DEBUG "));
-      Serial.print(F("lastSensorDate= "));
-      Serial.println(lastSensorDate);
-      Serial.print(F("SensorDate= "));
+  /*
+    if (topic == dateTopic) {
+      restartStaleTimer();
+      sensorDate = messageString;
+      Serial.print (F("Date= "));
       Serial.println(sensorDate);
-    }
-  }
+
+      if (sensorDate != lastSensorDate) {     // New date?
+        Serial.print(F("DEBUG "));
+        Serial.print(F("lastSensorDate= "));
+        Serial.println(lastSensorDate);
+        Serial.print(F("SensorDate= "));
+        Serial.println(sensorDate);
+      }
+    } //dateTopic
+  */
 
 
   if (topic == bgTopic) {
@@ -153,19 +155,14 @@ void callback(String topic, byte * message, unsigned int length) {
     bgTimestamp = now();                  // Used to flag if more than staleTime without a bg read has elapsed.
     // now() is giving you UNIX time in seconds.
 
-    // Reset the stale data timer
-    staleFlag = false;                    // Clear the stale flag, if it's on.
-    staleTicker.detach();                 // Restart the stale timer
-    staleTicker.attach(120, staleTick);   // Call the staleTick function after two minutes.
-
   }         //if topic==bgtopic
 
 
 
   if (topic == trendTopic) {
     restartStaleTimer();
-    Serial.print(F("trendTopic:messageString= "));
-    Serial.println(messageString);
+    ///    Serial.print(F("trendTopic:messageString= "));
+    ///    Serial.println(messageString);
     switch (messageString.toInt())
     {
       case 1:

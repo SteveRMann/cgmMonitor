@@ -2,6 +2,15 @@
 void loop() {
   ArduinoOTA.handle();
 
+  // Is WiFi connected?
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.println(F("WiFi not connected. Rebooting in 5 seconds"));
+    Serial.print(F("WiFi.status= "));
+    Serial.println(WiFi.status());
+    delay(5000);
+    ESP.restart();
+  }
+
   if (rssiTimer.ding()) publishRssi();
 
   //Re-connect the pubsub client to the mqtt broker
@@ -25,13 +34,13 @@ void loop() {
 
 
 
-/*
-  if (now() - bgTimestamp > staleTime) {    //If the BG reading is stale..
-    Serial.println(F("DEBUG- staleTime timeout"));
-    bgDisplay.writeDigitAscii(3, '*');
-    bgDisplay.writeDisplay();
-  }
-*/
+  /*
+    if (now() - bgTimestamp > staleTime) {    //If the BG reading is stale..
+      Serial.println(F("DEBUG- staleTime timeout"));
+      bgDisplay.writeDigitAscii(3, '*');
+      bgDisplay.writeDisplay();
+    }
+  */
 
   //Now, we just wait for a callback
 
