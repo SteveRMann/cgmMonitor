@@ -1,22 +1,19 @@
 
 // **************************************** SETUP *************************************
 void setup() {
-  int rc;
   beginSerial();
 
   pinMode(ledPin, OUTPUT);                  // LedPin is an indicator that an MQTT message was received.
   digitalWrite(ledPin, ledOFF);
 
-  //  setup_wifi();
-  rc = setup_wifiMulti();
-  while (rc > 0) {
-    Serial.println(F("setup_wifimulti failed"));
-    rc = setup_wifiMulti();
-  };
+  setup_wifi();
   start_OTA();
 
-  client.setServer(MQTT_SERVER, 1883);    //Server details for pubsub.
-  client.setCallback(callback);
+  // Set the MQTT server and keep-alive interval
+  Client.setServer(MQTT_SERVER, 1883);    //Server details for pubsub.
+  Client.setKeepAlive(60);  // Set the keep-alive interval (in seconds)
+
+  Client.setCallback(callback);
 
   Serial.println("...............");
   Serial.print(F("Node name= "));

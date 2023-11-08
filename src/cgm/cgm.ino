@@ -9,8 +9,8 @@
 //#define Mac5B668A  //Office
 //#define Mac69789C  //Desktop
 //#define MacADA75B  //MBR
-#define MacD010E9    //Workshop
-
+//#define MacD010E9    //Workshop
+#define MacB58193    //Test
 
 /*****
 
@@ -62,19 +62,18 @@
 
 // ****************************** Includes  ******************************
 #include <ArduinoOTA.h>
-#include <ESP8266WiFiMulti.h>
-//#include "ESP8266WiFi.h"
+////#include <ESP8266WiFiMulti.h>
+#include "ESP8266WiFi.h"
 #include <PubSubClient.h>
 #include <TimeLib.h>
 //#include <Time.h>
 #include "Kaywinnet.h"
 
 //--------------- WiFiMulti declarations ---------------
-ESP8266WiFiMulti wifiMulti;
+////ESP8266WiFiMulti wifiMulti;
 
 // WiFi connect timeout per AP. Increase when connecting takes longer.
 const uint32_t connectTimeoutMs = 5000;
-
 
 
 
@@ -112,7 +111,7 @@ const char *brightTopic = NODENAME "/bright";           // Allows the setting of
 //String lastTime = "";                                   //Last time displayed
 
 
-// setup_wifi vars
+//---------------- setup_wifi vars ----------------
 char macBuffer[24];       // Holds the last three digits of the MAC, in hex.
 char hostNamePrefix[] = hostPrefix;
 char hostName[12];        // Holds hostNamePrefix + the last three bytes of the MAC address.
@@ -164,28 +163,34 @@ Adafruit_AlphaNum4 timeDisplay = Adafruit_AlphaNum4();
 // Initializes the espClient. The espClient name must be unique
 #ifdef MacD010E9 //Kitchen
 WiFiClient espCGM_10E9;
-PubSubClient client(espCGM_10E9);
+PubSubClient Client(espCGM_10E9);
 #endif
 
 #ifdef Mac5B668A  //Office
 WiFiClient espCGM_668A;
-PubSubClient client(espCGM_668A);
+PubSubClient Client(espCGM_668A);
 #endif
 
 #ifdef MacADA75B  //MBR
 WiFiClient espCGM_A75B;
-PubSubClient client(espCGM_A75B);
+PubSubClient Client(espCGM_A75B);
 #endif
 
 #ifdef Mac0C6E00  //FamilyRoom
 WiFiClient espCGM_6E00;
-PubSubClient client(espCGM_6E00);
+PubSubClient Client(espCGM_6E00);
 #endif
 
 #ifdef Mac69789C  //Desktop
 WiFiClient espCGM_789C;
-PubSubClient client(espCGM_789C);
+PubSubClient Client(espCGM_789C);
 #endif
+
+#ifdef MacB58193  //Test Wemos
+WiFiClient espCGM_8193;
+PubSubClient Client(espCGM_8193);
+#endif
+
 
 /*
    /MAC Addresses:

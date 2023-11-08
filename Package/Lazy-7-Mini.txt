@@ -1,0 +1,1 @@
+This is a crative 7-segment clock project that uses addressable LED strips.

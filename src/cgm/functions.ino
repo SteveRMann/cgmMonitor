@@ -40,7 +40,7 @@ void publishRssi() {
   //Serial.print(F("RSSI: "));
   //Serial.print(temp);
   //Serial.println(F("====="));
-  client.publish(rssiTopic, temp);
+  Client.publish(rssiTopic, temp);
   rssiTimer.start();
 }
 

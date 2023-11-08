@@ -14,11 +14,11 @@ void loop() {
   if (rssiTimer.ding()) publishRssi();
 
   //Re-connect the pubsub client to the mqtt broker
-  if (!client.connected()) {
+  if (!Client.connected()) {
     reconnect();
   }
-  if (!client.loop()) {
-    client.connect(hostName);
+  if (!Client.loop()) {
+    Client.connect(hostName);
   }
 
   if (millis() - ledMillis > ledTime) {     //If the led has been on for a while, turn it off.

@@ -1,39 +1,45 @@
 
+/*
+ * In setup()   
+ * // Set the MQTT server and keep-alive interval  
+ * Client.setServer(MQTT_SERVER, 1883);    //Server details for pubsub.  
+ * Client.setKeepAlive(60);  // Set the keep-alive interval (in seconds)
+ */
 //************************** reconnect to MQTT broker ********************************
 void reconnect() {
   // Loop until we're reconnected
-  while (!client.connected())
+  while (!Client.connected())
   {
     Serial.print(F("Attempting MQTT connection..."));
 
     // Attempt to connect
-    if (client.connect(hostName))
+    if (Client.connect(hostName))
     {
       Serial.println(F("connected"));
 
       // Subscribe or resubscribe to topics
 
-      client.subscribe(cmndTopic);
+      Client.subscribe(cmndTopic);
       Serial.print(F("Subscribing to "));
       Serial.println(cmndTopic);
 
-      client.subscribe(bgTopic);
+      Client.subscribe(bgTopic);
       Serial.print(F("Subscribing to "));
       Serial.println(bgTopic);
 
-      client.subscribe(trendTopic);
+      Client.subscribe(trendTopic);
       Serial.print(F("Subscribing to "));
       Serial.println(trendTopic);
 
-      client.subscribe(dateTopic);
+      Client.subscribe(dateTopic);
       Serial.print(F("Subscribing to "));
       Serial.println(dateTopic);
 
-      client.subscribe(timeTopic);
+      Client.subscribe(timeTopic);
       Serial.print(F("Subscribing to "));
       Serial.println(timeTopic);
 
-      client.subscribe(brightTopic);
+      Client.subscribe(brightTopic);
       Serial.print(F("Subscribing to "));
       Serial.println(brightTopic);
 
@@ -42,7 +48,7 @@ void reconnect() {
     } else {
       //digitalWrite(ledPin, ledOFF);
       Serial.print(F("failed, rc="));
-      Serial.print(String(client.state()));
+      Serial.print(String(Client.state()));
       Serial.println(F(" try again in 5 seconds"));
       delay(5000);
 
