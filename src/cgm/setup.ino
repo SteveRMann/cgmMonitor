@@ -15,7 +15,9 @@ void setup() {
   };
   start_OTA();
 
+  // Set MQTT server and connection timeout
   client.setServer(MQTT_SERVER, 1883);    //Server details for pubsub.
+  //client.setServer(MQTT_SERVER, 1883, 30);    // 30 seconds timeout
   client.setCallback(callback);
 
   Serial.println("...............");

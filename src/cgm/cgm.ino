@@ -10,7 +10,7 @@
 //#define Mac69789C  //Desktop
 //#define MacADA75B  //MBR
 #define MacD010E9    //Workshop
-
+//#define MacB5AE42    //Test
 
 /*****
 
@@ -64,9 +64,9 @@
 #include <ArduinoOTA.h>
 #include <ESP8266WiFiMulti.h>
 //#include "ESP8266WiFi.h"
+#define MQTT_SOCKET_TIMEOUT 30        //Increase the PubSubClient timeout to 30-seconds (was 15)
 #include <PubSubClient.h>
 #include <TimeLib.h>
-//#include <Time.h>
 #include "Kaywinnet.h"
 
 //--------------- WiFiMulti declarations ---------------
@@ -186,6 +186,12 @@ PubSubClient client(espCGM_6E00);
 WiFiClient espCGM_789C;
 PubSubClient client(espCGM_789C);
 #endif
+
+#ifdef MacB5AE42  //Test
+WiFiClient espCGM_AE42;
+PubSubClient client(espCGM_AE42);
+#endif
+
 
 /*
    /MAC Addresses:

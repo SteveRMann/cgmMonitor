@@ -33,10 +33,10 @@ int setup_wifiMulti() {
 #ifndef Kaywinnet
 #include "Kaywinnet.h"
 #endif
-  wifiMulti.addAP("Naboo", NABOO_PASSWORD);
-  wifiMulti.addAP("Serenity", SERENITY_PASSWORD);
-  wifiMulti.addAP("Miranda", MIRANDA_PASSWORD);
-  wifiMulti.addAP("Kaywinnet", KAYWINNET_PASSWORD);
+  wifiMulti.addAP(MY_SSID, MY_PASSWORD);
+  wifiMulti.addAP(IOT_SSID, IOT_PASSWORD);
+  wifiMulti.addAP(GUEST_SSID, GUEST_PASSWORD);
+    
 
   if (wifiMulti.run(connectTimeoutMs) == WL_CONNECTED) {
     Serial.print(F("WiFi connected: "));
