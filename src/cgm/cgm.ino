@@ -1,5 +1,5 @@
 #define SKETCH "cgm.ino"
-#define VERSION "4.20"           // Four characters
+#define VERSION "4.21"           // Four characters
 #define hostPrefix "CGM-"        // Six characters max
 
 // The espClient name must be unique. Uncomment one
@@ -7,8 +7,8 @@
 // MAC Addresses:
 //#define Mac0C6E00  //FamilyRoom
 //#define Mac5B668A  //Office
-#define Mac69789C  //Desktop
-//#define MacADA75B  //MBR
+//#define Mac69789C  //Desktop
+#define MacADA75B  //MBR
 //#define MacD010E9    //Workshop
 //#define MacB5AE42    //Test
 
@@ -21,6 +21,7 @@
   Version 4.00 (03/01/22) Changed WiFi to WiFiMulti
   Version 4.01 (03/20/22) Added 'miranda' to WiFimulti
   Version 4.20 (12/20/22) Added test to setup_wifiMulti (success or fail)
+  Version 4.21 (01/17/24) Changed crashTimer to unsigned long
 
 **PROBLEMS**
   I am using millis to test for stale data timeout, but the code also includes the ticker.h library.
@@ -137,7 +138,7 @@ const bool ledON = HIGH;
 unsigned long ledMillis;              // Used to time the LED on period
 unsigned long ledTime = 250;          // How long the LED should be on. Resets with each incoming MQTT message.
 
-int crashTimer;                       // Used to reboot if no new time value is received in timeTime ms.
+unsigned long crashTimer;             // Used to reboot if no new time value is received in timeTime ms.
 unsigned long crashTimeout = 120;     // How long to wait for new data before rebooting, in seconds.
 
 int bgTimestamp = 0;                  // Used to detect if bg reading is not received in ten minutes

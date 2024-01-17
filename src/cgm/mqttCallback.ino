@@ -88,7 +88,6 @@ void callback(String topic, byte * message, unsigned int length) {
     //Start the time timeout. If no time message arrives in crashTimeout seconds, then reboot the ESP.
     //This is different from the staleTimer that tracks only if no new BG data is received.
     crashTimer = now();
-
   }
 
 
