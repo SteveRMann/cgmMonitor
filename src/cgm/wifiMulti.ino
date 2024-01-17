@@ -34,8 +34,8 @@ int setup_wifiMulti() {
 #include "Kaywinnet.h"
 #endif
   wifiMulti.addAP(MY_SSID, MY_PASSWORD);
-  wifiMulti.addAP(IOT_SSID, IOT_PASSWORD);
-  wifiMulti.addAP(GUEST_SSID, GUEST_PASSWORD);
+//  wifiMulti.addAP(IOT_SSID, IOT_PASSWORD);
+//  wifiMulti.addAP(GUEST_SSID, GUEST_PASSWORD);
     
 
   if (wifiMulti.run(connectTimeoutMs) == WL_CONNECTED) {
