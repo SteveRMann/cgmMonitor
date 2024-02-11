@@ -1,10 +1,10 @@
 
 /*
- * In setup()   
- * // Set the MQTT server and keep-alive interval  
- * Client.setServer(MQTT_SERVER, 1883);    //Server details for pubsub.  
- * Client.setKeepAlive(60);  // Set the keep-alive interval (in seconds)
- */
+   In setup()
+   // Set the MQTT server and keep-alive interval
+   Client.setServer(MQTT_SERVER, 1883);    //Server details for pubsub.
+   Client.setKeepAlive(60);  // Set the keep-alive interval (in seconds)
+*/
 //************************** reconnect to MQTT broker ********************************
 void reconnect() {
   // Loop until we're reconnected
@@ -12,12 +12,23 @@ void reconnect() {
   {
     Serial.print(F("Attempting MQTT connection..."));
 
+
+    //Test
+    // Create a random client ID
+    String clientId = "ESP8266Client-";
+    clientId += String(random(0xffff), HEX);
+
     // Attempt to connect
-    if (Client.connect(hostName))
-    {
-      Serial.println(F("connected"));
+    if (Client.connect(clientId.c_str(), "mqttuser", "nudist")) {
+
+      ///    // Attempt to connect
+      ///    if (Client.connect(hostName, "mqttuser", "nudist")){
+      ///      Serial.println(F("connected"));
+      //End Test
+
 
       // Subscribe or resubscribe to topics
+      Serial.println();
 
       Client.subscribe(cmndTopic);
       Serial.print(F("Subscribing to "));
@@ -31,9 +42,9 @@ void reconnect() {
       Serial.print(F("Subscribing to "));
       Serial.println(trendTopic);
 
-      Client.subscribe(dateTopic);
-      Serial.print(F("Subscribing to "));
-      Serial.println(dateTopic);
+///      Client.subscribe(dateTopic);
+///      Serial.print(F("Subscribing to "));
+///      Serial.println(dateTopic);
 
       Client.subscribe(timeTopic);
       Serial.print(F("Subscribing to "));

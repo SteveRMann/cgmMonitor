@@ -40,7 +40,7 @@ void callback(String topic, byte * message, unsigned int length) {
 
 
   if (topic == timeTopic) {
-    restartStaleTimer();
+    ///restartStaleTimer();
     //Time from Node Red is always 5 characters.
     //For example: "12:34" or "01:05"
     //Add the decimal point to the second digit since the display doesn't have a colon.
@@ -87,14 +87,14 @@ void callback(String topic, byte * message, unsigned int length) {
 
     //Start the time timeout. If no time message arrives in crashTimeout seconds, then reboot the ESP.
     //This is different from the staleTimer that tracks only if no new BG data is received.
-    crashTimer = now();
+    ///crashTimer = now();
 
   }
 
 
 
   if (topic == brightTopic) {
-    restartStaleTimer();
+    ///restartStaleTimer();
     brightness = messageString.toInt();
     timeDisplay.setBrightness(brightness);
     bgDisplay.setBrightness(brightness);
@@ -120,7 +120,7 @@ void callback(String topic, byte * message, unsigned int length) {
 
 
   if (topic == bgTopic) {
-    restartStaleTimer();
+    ///restartStaleTimer();
     //What we really want to do is display the msg on the HT16K33 I2C display.
     //Format the array, right-justified, leading spaces, but leaving the rightmost display character empty.
     //for trend up/down arrows.
@@ -152,7 +152,7 @@ void callback(String topic, byte * message, unsigned int length) {
     }
 
 
-    bgTimestamp = now();                  // Used to flag if more than staleTime without a bg read has elapsed.
+    ///bgTimestamp = now();                  // Used to flag if more than staleTime without a bg read has elapsed.
     // now() is giving you UNIX time in seconds.
 
   }         //if topic==bgtopic
@@ -160,7 +160,7 @@ void callback(String topic, byte * message, unsigned int length) {
 
 
   if (topic == trendTopic) {
-    restartStaleTimer();
+    ///restartStaleTimer();
     ///    Serial.print(F("trendTopic:messageString= "));
     ///    Serial.println(messageString);
     switch (messageString.toInt())

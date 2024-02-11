@@ -1,16 +1,21 @@
-#define SKETCH "cgm.ino"
-#define VERSION "4.20"           // Four characters
+#define SKETCH __FILE__
+#define VERSION "5.01"           // Four characters
 #define hostPrefix "CGM-"        // Six characters max
 
+
+// WiFiClient espClientx;
+// PubSubClient client(espClientx);
+// 'espClientx' is the name of a variable. It disappears at compile time.
 // The espClient name must be unique. Uncomment one
 // Make sure the same port is selected in tools.
 // MAC Addresses:
 //#define Mac0C6E00  //FamilyRoom
 //#define Mac5B668A  //Office
-//#define Mac69789C  //Desktop
+#define Mac69789C  //Desktop
 //#define MacADA75B  //MBR
 //#define MacD010E9    //Workshop
-#define MacB58193    //Test
+//#define MacB58193    //Test
+//#define MacB5AE42    //Test
 
 /*****
 
@@ -21,7 +26,9 @@
   Version 4.00 (03/01/22) Changed WiFi to WiFiMulti
   Version 4.01 (03/20/22) Added 'miranda' to WiFimulti
   Version 4.20 (12/20/22) Added test to setup_wifiMulti (success or fail)
-
+  Version 5.00 (12/13/23) Removed ticker.
+  Version 5.01 (12/13/23) Removed crashtimer
+  
 **PROBLEMS**
   I am using millis to test for stale data timeout, but the code also includes the ticker.h library.
   Which is more useful?
@@ -80,13 +87,13 @@ const uint32_t connectTimeoutMs = 5000;
 //--------------- timeObj declarations ---------------
 #include <dlay.h>
 const long int SECONDS = 1000;        //ms per second
-int rssiTime = 15 * SECONDS;          //How often to publish RSSI
-dlay rssiTimer(rssiTime, true);       //How often in ms to publish RSSI
+///int rssiTime = 15 * SECONDS;          //How often to publish RSSI
+///dlay rssiTimer(rssiTime, true);       //How often in ms to publish RSSI
 //--------------- end timeObj declarations ---------------
 
 
-#include <Ticker.h>
-Ticker staleTicker;                   //Ticker object for the stale ticker flag.
+///#include <Ticker.h>
+///Ticker staleTicker;                   //Ticker object for the stale ticker flag.
 
 #define DEBUG true                    //set to true for debug output, false for no debug ouput
 #define Serial if(DEBUG)Serial
@@ -104,7 +111,7 @@ const char *cmndTopic = NODENAME "/cmnd";
 const char *rssiTopic = NODENAME "/rssi";
 const char *bgTopic = NODENAME "/bg";
 const char *trendTopic = NODENAME "/trend";
-const char *dateTopic = NODENAME "/date";               // Sent as dateString from Node Red
+///const char *dateTopic = NODENAME "/date";               // Sent as dateString from Node Red
 const char *timeTopic = NODENAME "/time";               // Time from Node-Red, hh:mm every ten seconds.
 const char *brightTopic = NODENAME "/bright";           // Allows the setting of the display brightness
 
@@ -136,10 +143,10 @@ const bool ledON = HIGH;
 unsigned long ledMillis;              // Used to time the LED on period
 unsigned long ledTime = 250;          // How long the LED should be on. Resets with each incoming MQTT message.
 
-int crashTimer;                       // Used to reboot if no new time value is received in timeTime ms.
-unsigned long crashTimeout = 120;     // How long to wait for new data before rebooting, in seconds.
+///int crashTimer;                       // Used to reboot if no new time value is received in timeTime ms.
+///unsigned long crashTimeout = 120;     // How long to wait for new data before rebooting, in seconds.
 
-int bgTimestamp = 0;                  // Used to detect if bg reading is not received in ten minutes
+///int bgTimestamp = 0;                  // Used to detect if bg reading is not received in ten minutes
 const int staleTime = 120;            // Number of seconds in two minutes.
 String sensorDate;
 String lastSensorDate;                // The last sendor date.  If this is unchanged after ten minutes, then the data is stale.

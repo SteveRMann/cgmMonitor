@@ -1,4 +1,6 @@
+// *********************************** lightAllSegments()*********************************
 void lightAllSegments() {
+  /*
   // Light up all digits, one at a time.  Also has the effect of clearing the display buffers.
 
     // timeDisplay
@@ -44,5 +46,5 @@ void lightAllSegments() {
   
   delay(1000);
 
-
+*/
 }

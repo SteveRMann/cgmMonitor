@@ -23,11 +23,9 @@ void setup_wifi() {
   byte mac[6];                    // The MAC address of your Wifi
 
   Serial.println(F("\n"));
-  Serial.print(F("SSID: "));
+  Serial.print(F("Connecting to: "));
   Serial.println(MY_SSID);
-  Serial.print(F("Password: "));
-  Serial.println(MY_PASSWORD);
-  dbugs("Connecting to ", MY_SSID);
+
 
   // Disconnect from the current WiFi network and reset WiFi configuration
   WiFi.disconnect(true);
@@ -39,7 +37,7 @@ void setup_wifi() {
   WiFi.begin(MY_SSID, MY_PASSWORD);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
-    Serial.print(WiFi.status()); Serial.print(F(" "));
+    Serial.print(WiFi.status());
   }
   Serial.println(F("\nWiFi connected, "));
   Serial.print(F("MAC Address: "));
@@ -58,8 +56,9 @@ void setup_wifi() {
   strcat(hostName, "-");
   strcat(hostName, macBuffer);
   WiFi.hostname(hostName);
-  dbugs("hostName= ", hostName);
-
+  Serial.print(F("hostName: "));
+  Serial.println(hostName);
+ 
 
   /* Some experiments
     int value = atoi(mac5);

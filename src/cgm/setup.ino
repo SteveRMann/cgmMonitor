@@ -2,15 +2,17 @@
 // **************************************** SETUP *************************************
 void setup() {
   beginSerial();
+  Serial.println();
+  Serial.println(__FILE__);
 
   pinMode(ledPin, OUTPUT);                  // LedPin is an indicator that an MQTT message was received.
   digitalWrite(ledPin, ledOFF);
 
   setup_wifi();
-  start_OTA();
+  ///start_OTA();
 
   // Set the MQTT server and keep-alive interval
-  Client.setServer(MQTT_SERVER, 1883);    //Server details for pubsub.
+  Client.setServer(HA_MQTT_SERVER, 1883);    //Server details for pubsub.
   Client.setKeepAlive(60);  // Set the keep-alive interval (in seconds)
 
   Client.setCallback(callback);
@@ -26,8 +28,8 @@ void setup() {
   Serial.println((String(bgTopic)));
   Serial.print(F("trendTopic= "));
   Serial.println((String(trendTopic)));
-  Serial.print(F("dateTopic= "));
-  Serial.println((String(dateTopic)));
+///  Serial.print(F("dateTopic= "));
+///  Serial.println((String(dateTopic)));
   Serial.print(F("timeTopic= "));
   Serial.println((String(timeTopic)));
   Serial.println(F("..............."));
@@ -55,5 +57,6 @@ void setup() {
   bgDisplay.writeDisplay();
   digitalWrite(ledPin, ledOFF);
 
-  crashTimer = now();          // Reboot if the data is not updated in crashTimeout seconds.
+  ///crashTimer = now();          // Reboot if the data is not updated in crashTimeout seconds.
+  randomSeed(micros());
 }

@@ -10,7 +10,7 @@ void start_OTA() {
     // Start loop() with:
     ArduinoOTA.handle();
   */
-
+  /*
   //Hostname defaults to esp8266-[MAC address]
   ArduinoOTA.setHostname(hostName);                 // hostName is generated in 'setup_wifi'.
   //ArduinoOTA.setHostname("Steve");                 // hostName is generated in 'setup_wifi'.
@@ -47,5 +47,5 @@ void start_OTA() {
   });
   ArduinoOTA.begin();
   Serial.println("OTA Ready");
-
+*/
 }

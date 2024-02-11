@@ -11,7 +11,7 @@ void loop() {
     ESP.restart();
   }
 
-  if (rssiTimer.ding()) publishRssi();
+  ///if (rssiTimer.ding()) publishRssi();
 
   //Re-connect the pubsub client to the mqtt broker
   if (!Client.connected()) {
@@ -25,12 +25,12 @@ void loop() {
     digitalWrite(ledPin, ledOFF);
   }
 
-  if (now() - crashTimer > crashTimeout) {    //If the time has not been updated, assume the worst.
-    ESP.restart();
-  }
+  ///  if (now() - crashTimer > crashTimeout) {    //If the time has not been updated, assume the worst.
+  ///    ESP.restart();
+  ///  }
 
   //staleFlag is set if the stale tick timer times out
-  if (staleFlag) ESP.reset();
+  ///if (staleFlag) ESP.reset();
 
 
 

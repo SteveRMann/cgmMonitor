@@ -1,5 +1,6 @@
 // *********************************** showNumbers()*********************************
 void showNumbers() {
+  /*
   int dlay = 1000;           // Time between numbers
 
 
@@ -25,4 +26,5 @@ void showNumbers() {
   bgDisplay.writeDigitRaw(3, 0x0);
   bgDisplay.writeDisplay();
   delay(1000);
+  */
 }
