@@ -11,11 +11,13 @@
 // MAC Addresses:
 //#define Mac0C6E00  //FamilyRoom
 //#define Mac5B668A  //Office
-#define Mac69789C  //Desktop
+//#define Mac69789C  //Desktop
+#define MacABA962    //Latest build
 //#define MacADA75B  //MBR
-//#define MacD010E9    //Workshop
 //#define MacB58193    //Test
 //#define MacB5AE42    //Test
+//#define MacD010E9    //Workshop
+
 
 /*****
 
@@ -176,6 +178,11 @@ PubSubClient Client(espCGM_10E9);
 #ifdef Mac5B668A  //Office
 WiFiClient espCGM_668A;
 PubSubClient Client(espCGM_668A);
+#endif
+
+#ifdef MacABA962  //Latest build
+WiFiClient espCGM_A962;
+PubSubClient Client(espCGM_A962);
 #endif
 
 #ifdef MacADA75B  //MBR
