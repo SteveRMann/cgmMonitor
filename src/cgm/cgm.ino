@@ -6,17 +6,20 @@
 // WiFiClient espClientx;
 // PubSubClient client(espClientx);
 // 'espClientx' is the name of a variable. It disappears at compile time.
+//
 // The espClient name must be unique. Uncomment one
+// This identifies a specific unit for OTA purposes.
 // Make sure the same port is selected in tools.
 // MAC Addresses:
-//#define Mac0C6E00  //FamilyRoom
-//#define Mac5B668A  //Office
-//#define Mac69789C  //Desktop
-#define MacABA962    //Latest build
-//#define MacADA75B  //MBR
-//#define MacB58193    //Test
-//#define MacB5AE42    //Test
-//#define MacD010E9    //Workshop
+#define Mac0C6E00
+//#define Mac5B668A
+//#define Mac69789C
+//#define MacABA962
+//#define MacADA75B
+//#define MacB58193
+//#define MacB5AE42
+//#define MacB5D5A2
+//#define MacD010E9
 
 
 /*****
@@ -205,6 +208,10 @@ WiFiClient espCGM_8193;
 PubSubClient Client(espCGM_8193);
 #endif
 
+#ifdef MacB5D5A2  //Test Wemos
+WiFiClient espCGM_D5A2;
+PubSubClient Client(espCGM_D5A2);
+#endif
 
 /*
    /MAC Addresses:
