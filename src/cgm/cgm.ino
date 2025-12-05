@@ -20,8 +20,8 @@
 //#define MacB58193
 //#define MacB5AE42
 //#define MacB5D5A2
-//#define MacD010E9
-#define Mac259A0F
+#define MacD010E9
+//#define Mac259A0F
 
 /*****
 
