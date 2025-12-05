@@ -1,7 +1,8 @@
 #define SKETCH __FILE__
-#define VERSION "5.01"           // Four characters
+#define VERSION "5.02"           // Four characters
 #define hostPrefix "CGM-"        // Six characters max
 
+// #define DEBUG - See line 104
 
 // WiFiClient espClientx;
 // PubSubClient client(espClientx);
@@ -11,14 +12,14 @@
 // This identifies a specific unit for OTA purposes.
 // Make sure the same port is selected in tools.
 // MAC Addresses:
-#define Mac0C6E00
+//#define Mac0C6E00
 //#define Mac5B668A
 //#define Mac69789C
 //#define MacABA962
 //#define MacADA75B
 //#define MacB58193
 //#define MacB5AE42
-//#define MacB5D5A2
+#define MacB5D5A2
 //#define MacD010E9
 
 
@@ -33,6 +34,7 @@
   Version 4.20 (12/20/22) Added test to setup_wifiMulti (success or fail)
   Version 5.00 (12/13/23) Removed ticker.
   Version 5.01 (12/13/23) Removed crashtimer
+  Version 5.02 (12/05/25) Reverted back to MQTT broker at 192.168.1.124
   
 **PROBLEMS**
   I am using millis to test for stale data timeout, but the code also includes the ticker.h library.
@@ -146,7 +148,7 @@ byte tempI;
 const bool ledOFF = LOW;
 const bool ledON = HIGH;
 unsigned long ledMillis;              // Used to time the LED on period
-unsigned long ledTime = 250;          // How long the LED should be on. Resets with each incoming MQTT message.
+unsigned long ledTime = 25;           // How long the LED should be on in ms. Resets with each incoming MQTT message.
 
 ///int crashTimer;                       // Used to reboot if no new time value is received in timeTime ms.
 ///unsigned long crashTimeout = 120;     // How long to wait for new data before rebooting, in seconds.

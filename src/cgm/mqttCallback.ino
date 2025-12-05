@@ -8,9 +8,9 @@ void callback(String topic, byte * message, unsigned int length) {
   digitalWrite(ledPin, ledON);          //Turn on LED and start timing it.
   ledMillis = millis();
 
-  ///Serial.println();
-  ///Serial.print(F("Message arrived on topic: "));
-  ///Serial.println(topic);
+  Serial.println();
+  Serial.print(F("Message arrived on topic: "));
+  Serial.println(topic);
 
 
   // Convert the character array to a string
@@ -22,13 +22,12 @@ void callback(String topic, byte * message, unsigned int length) {
   messageString.toUpperCase();          //Make the string upper-case
 
 
-  ///Serial.print("messageString: ");
-  ///Serial.print(messageString);
-  ///Serial.println();
-  //Serial.print(F("Length= "));
-  //Serial.print(length);
-  //Serial.println();
-
+  Serial.print("messageString: ");
+  Serial.print(messageString);
+  Serial.println();
+  Serial.print(F("Length= "));
+  Serial.print(length);
+  Serial.println();
 
 
 
