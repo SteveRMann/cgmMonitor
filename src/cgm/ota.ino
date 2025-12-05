@@ -1,5 +1,5 @@
 void start_OTA() {
-  /*
+  /*github
     Make sure this in at the top of the sketch:
     // ---------- ota ----------
     #include <ArduinoOTA.h>

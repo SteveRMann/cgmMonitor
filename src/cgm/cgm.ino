@@ -19,9 +19,9 @@
 //#define MacADA75B
 //#define MacB58193
 //#define MacB5AE42
-#define MacB5D5A2
+//#define MacB5D5A2
 //#define MacD010E9
-
+#define Mac259A0F
 
 /*****
 
@@ -210,10 +210,16 @@ WiFiClient espCGM_8193;
 PubSubClient Client(espCGM_8193);
 #endif
 
-#ifdef MacB5D5A2  //Test Wemos
+#ifdef MacB5D5A2
 WiFiClient espCGM_D5A2;
 PubSubClient Client(espCGM_D5A2);
 #endif
+
+#ifdef Mac259A0F  //Test Wemos
+WiFiClient espCGM_9A0F;
+PubSubClient Client(espCGM_9A0F);
+#endif
+
 
 /*
    /MAC Addresses:
