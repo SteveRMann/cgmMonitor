@@ -54,6 +54,16 @@ void reconnect() {
       Serial.print(F("Subscribing to "));
       Serial.println(brightTopic);
 
+      Client.subscribe(batteryTopic);
+      Serial.print(F("Subscribing to "));
+      Serial.println(batteryTopic);
+
+      Client.subscribe(chargeTopic);
+      Serial.print(F("Subscribing to "));
+      Serial.println(chargeTopic);
+
+
+
       Serial.println(F("====================="));
 
     } else {

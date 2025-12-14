@@ -1,5 +1,5 @@
 #define SKETCH __FILE__
-#define VERSION "5.02"           // Four characters
+#define VERSION "5.03"           // Four characters
 #define hostPrefix "CGM-"        // Six characters max
 
 // #define DEBUG - See line 104
@@ -13,14 +13,14 @@
 // Make sure the same port is selected in tools.
 // MAC Addresses:
 //#define Mac0C6E00
-//#define Mac5B668A
+#define Mac5B668A
 //#define Mac69789C
 //#define MacABA962
 //#define MacADA75B
 //#define MacB58193
 //#define MacB5AE42
 //#define MacB5D5A2
-#define MacD010E9
+//#define MacD010E9
 //#define Mac259A0F
 
 /*****
@@ -35,6 +35,7 @@
   Version 5.00 (12/13/23) Removed ticker.
   Version 5.01 (12/13/23) Removed crashtimer
   Version 5.02 (12/05/25) Reverted back to MQTT broker at 192.168.1.124
+  Version 5.03 (12/13/25) Added topics for battery charge level and state
   
 **PROBLEMS**
   I am using millis to test for stale data timeout, but the code also includes the ticker.h library.
@@ -121,6 +122,8 @@ const char *trendTopic = NODENAME "/trend";
 ///const char *dateTopic = NODENAME "/date";               // Sent as dateString from Node Red
 const char *timeTopic = NODENAME "/time";               // Time from Node-Red, hh:mm every ten seconds.
 const char *brightTopic = NODENAME "/bright";           // Allows the setting of the display brightness
+const char *batteryTopic = NODENAME "/battery";         // Charge percent of phone battery
+const char *chargeTopic = NODENAME "/charge";           // Charge or discharge of phone battery
 
 //String lastTime = "";                                   //Last time displayed
 
