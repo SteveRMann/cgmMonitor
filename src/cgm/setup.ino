@@ -12,7 +12,8 @@ void setup() {
   ///start_OTA();
 
   // Set the MQTT server and keep-alive interval
-  Client.setServer(myMQTT_SERVER, 1883);    //Server details for pubsub.
+  //Client.setServer(myMQTT_SERVER, 1883);    //Server details for pubsub.
+  Client.setServer(HA_MQTT_SERVER, 1883);    //Server details for pubsub.
   Client.setKeepAlive(60);  // Set the keep-alive interval (in seconds)
 
   Client.setCallback(callback);
