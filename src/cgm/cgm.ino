@@ -14,7 +14,7 @@
 // MAC Addresses:
 //#define Mac0C6E00
 //#define Mac5B668A
-#define Mac69789C
+//#define Mac69789C
 //#define MacABA962
 //#define MacADA75B
 //#define MacB58193
@@ -22,6 +22,7 @@
 //#define MacB5D5A2
 //#define MacD010E9
 //#define Mac259A0F
+
 
 /*****
 
@@ -46,9 +47,7 @@
     Wemos D1 R1 Mini
 
   ---------------------------------------------------------------------------
-  The CGM data comes from a Node-Red flow.  A 'poll state' node reads the sensor.yaml 'platform:rest' which gets my CGM data from
-  https://my-g6.herokuapp.com/api/v1/entries/current.json.  My notes are here: 'Heroku APIs.txt'
-
+  The CGM data comes from a Node-Red flow.
   The instructions are here: https://community.home-assistant.io/t/dexcom-api/94730/5
   There are some details in the comments at the top of 'sensors.yaml'
 
@@ -222,6 +221,7 @@ PubSubClient Client(espCGM_D5A2);
 WiFiClient espCGM_9A0F;
 PubSubClient Client(espCGM_9A0F);
 #endif
+
 
 
 /*
