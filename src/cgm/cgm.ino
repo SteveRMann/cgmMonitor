@@ -14,8 +14,8 @@
 // MAC Addresses:
 //#define Mac0C6E00
 //#define Mac5B668A
-//#define Mac69789C
-#define MacABA962
+#define Mac69789C
+//#define MacABA962
 //#define MacADA75B
 //#define MacB58193
 //#define MacB5AE42
