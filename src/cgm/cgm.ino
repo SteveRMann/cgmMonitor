@@ -1,5 +1,5 @@
 #define SKETCH __FILE__
-#define VERSION "5.03"           // Four characters
+#define VERSION "5.04"           // Four characters
 #define hostPrefix "CGM-"        // Six characters max
 
 // #define DEBUG - See line 104
@@ -13,7 +13,7 @@
 // Make sure the same port is selected in tools.
 // MAC Addresses:
 //#define Mac0C6E00
-//#define Mac5B668A
+#define Mac5B668A
 //#define Mac69789C
 //#define MacABA962
 //#define MacADA75B
@@ -37,6 +37,7 @@
   Version 5.01 (12/13/23) Removed crashtimer
   Version 5.02 (12/05/25) Reverted back to MQTT broker at 192.168.1.124
   Version 5.03 (12/13/25) Added topics for battery charge level and state
+  Version 5.04 (12/18/25) MQTT broker is 192.168.1.57
   
 **PROBLEMS**
   I am using millis to test for stale data timeout, but the code also includes the ticker.h library.
