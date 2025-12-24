@@ -29,12 +29,13 @@ void setup() {
   Serial.println((String(bgTopic)));
   Serial.print(F("trendTopic=  "));
   Serial.println((String(trendTopic)));
-///  Serial.print(F("dateTopic= "));
-///  Serial.println((String(dateTopic)));
   Serial.print(F("timeTopic=   "));
   Serial.println((String(timeTopic)));
+  Serial.print(F("batteryTopic=   "));
+  Serial.println((String(batteryTopic)));
+  Serial.print(F("chargeTopic=   "));
+  Serial.println((String(chargeTopic)));
   Serial.println(F("..............."));
-
 
   bgDisplay.begin(0x70);                             // bgDisplay is on I2C address 70
   timeDisplay.begin(0x71);                           // timeDisplay is on I2C address 71
@@ -58,6 +59,5 @@ void setup() {
   bgDisplay.writeDisplay();
   digitalWrite(ledPin, ledOFF);
 
-  ///crashTimer = now();          // Reboot if the data is not updated in crashTimeout seconds.
-  randomSeed(micros());
+   randomSeed(micros());
 }

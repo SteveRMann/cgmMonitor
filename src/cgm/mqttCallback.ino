@@ -5,9 +5,6 @@ void callback(String topic, byte * message, unsigned int length) {
   int digit1 = 0;
   int digit3;
 
-  digitalWrite(ledPin, ledON);          //Turn on LED and start timing it.
-  ledMillis = millis();
-
   Serial.println();
   Serial.print(F("Message arrived on topic: "));
   Serial.println(topic);
@@ -84,10 +81,6 @@ void callback(String topic, byte * message, unsigned int length) {
     timeDisplay.writeDigitAscii(3, message[4]);
     timeDisplay.writeDisplay();
 
-    //Start the time timeout. If no time message arrives in crashTimeout seconds, then reboot the ESP.
-    //This is different from the staleTimer that tracks only if no new BG data is received.
-    ///crashTimer = now();
-
   }
 
 
@@ -98,24 +91,6 @@ void callback(String topic, byte * message, unsigned int length) {
     timeDisplay.setBrightness(brightness);
     bgDisplay.setBrightness(brightness);
   }
-
-
-  /*
-    if (topic == dateTopic) {
-      restartStaleTimer();
-      sensorDate = messageString;
-      Serial.print (F("Date= "));
-      Serial.println(sensorDate);
-
-      if (sensorDate != lastSensorDate) {     // New date?
-        Serial.print(F("DEBUG "));
-        Serial.print(F("lastSensorDate= "));
-        Serial.println(lastSensorDate);
-        Serial.print(F("SensorDate= "));
-        Serial.println(sensorDate);
-      }
-    } //dateTopic
-  */
 
 
   if (topic == bgTopic) {
@@ -149,11 +124,6 @@ void callback(String topic, byte * message, unsigned int length) {
       bgDisplay.writeDigitAscii(2, '?');
       bgDisplay.writeDisplay();
     }
-
-
-    ///bgTimestamp = now();                  // Used to flag if more than staleTime without a bg read has elapsed.
-    // now() is giving you UNIX time in seconds.
-
   }         //if topic==bgtopic
 
 
@@ -196,7 +166,30 @@ void callback(String topic, byte * message, unsigned int length) {
     }       //switch
     bgDisplay.writeDigitRaw(3, digit3);
     bgDisplay.writeDisplay();
+  }
 
 
-  }         //if topic==trendtopic
+  if (topic == chargeTopic) {
+    if (messageString == "CHARGING") {
+      charging = true;
+    }
+    else if (messageString == "FULL") {
+      charging = false;
+      digitalWrite(ledPin, ledON);
+    }
+    else if (messageString == "DISCHARGING") {
+      charging = false;
+      digitalWrite(ledPin, ledOFF);
+    }
+    else {
+      charging = false;
+    }
+  }
+
+
+  if (topic == batteryTopic) {
+    batteryPercent = messageString.toInt();
+  }
+
+
 }           //callback

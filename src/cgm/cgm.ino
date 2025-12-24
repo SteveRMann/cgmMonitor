@@ -1,5 +1,5 @@
 #define SKETCH __FILE__
-#define VERSION "5.05"           // Four characters
+#define VERSION "6.00"           // Four characters
 #define hostPrefix "CGM-"        // Six characters max
 
 #define DEBUG true               // set to true for debug output, false for no debug ouput
@@ -8,17 +8,7 @@
 /*****
   Github Repository local location: E:\cgmMonitor
 
-  Version 3.30 (11/10/21) Added rssi display on startup
-  Version 3.31 (11/11/21) Moved functions from the main ino file
-  Version 4.00 (03/01/22) Changed WiFi to WiFiMulti
-  Version 4.01 (03/20/22) Added 'miranda' to WiFimulti
-  Version 4.20 (12/20/22) Added test to setup_wifiMulti (success or fail)
-  Version 5.00 (12/13/23) Removed ticker.
-  Version 5.01 (12/13/23) Removed crashtimer
-  Version 5.02 (12/05/25) Reverted back to MQTT broker at 192.168.1.124
-  Version 5.03 (12/13/25) Added topics for battery charge level and state
-  Version 5.04 (12/18/25) MQTT broker is 192.168.1.57
-  Version 5.05 (12/18/25) Using a single "WiFiClient espClientx;" for all boards
+  Version 6.00 (12/22/25) Added topics for battery charge level and state
   
   IDE settings:
     NodeMCU 1.0 (ESP-12E Module), 4M, 1M SPIFFS
@@ -40,11 +30,6 @@
 #include "Kaywinnet.h"
 
 
-//--------------- timeObj declarations ---------------
-#include <dlay.h>
-const long int SECONDS = 1000;        //ms per second
-
-
 #include <Wire.h>                     // Wire.h is the library for communicating with I2C devices
 #include <Adafruit_GFX.h>
 #include "Adafruit_LEDBackpack.h"
@@ -61,7 +46,7 @@ const char *trendTopic = NODENAME "/trend";
 const char *timeTopic = NODENAME "/time";               // Time from Node-Red, hh:mm every ten seconds.
 const char *brightTopic = NODENAME "/bright";           // Allows the setting of the display brightness
 const char *batteryTopic = NODENAME "/battery";         // Charge percent of phone battery
-const char *chargeTopic = NODENAME "/charge";           // Charge or discharge of phone battery
+const char *chargeTopic = NODENAME "/charge";           // Phone battery, charge= true or false
 
 
 //---------------- setup_wifi vars ----------------
@@ -70,11 +55,14 @@ char hostNamePrefix[] = hostPrefix;
 char hostName[12];        // Holds hostNamePrefix + the last three bytes of the MAC address.
 
 
-//---------------- GPIO ------------------------------
-const int ledPin = D5;
-#define LEDPIN            //When defined, the LED is flashed while WiFi is connecting.
-
-
+//---------------- LED Blink ------------------------------
+const int ledPin = D6;
+const int ledON  = HIGH;
+const int ledOFF = LOW;
+bool charging = false;                // Set in MQTT callback if the phone battery is charging
+unsigned long chargeBlinkTimer = 0;
+bool chargeBlinkState = false;   // false = LED OFF, true = LED ON
+int batteryPercent = 0;               // Battery charge in percent
 
 
 //---------------- Global Vars -------------------------
@@ -83,18 +71,9 @@ const int ledPin = D5;
 
 int lastDim = HIGH;
 int lastBright = HIGH;
-byte tempI;
-const bool ledOFF = LOW;
-const bool ledON = HIGH;
-unsigned long ledMillis;              // Used to time the LED on period
-unsigned long ledTime = 25;           // How long the LED should be on in ms. Resets with each incoming MQTT message.
-
-const int staleTime = 120;            // Number of seconds in two minutes.
-String sensorDate;
-String lastSensorDate;                // The last sendor date.  If this is unchanged after ten minutes, then the data is stale.
-bool staleFlag = false;               // Flag is set if no new sensor data is received in two minutes
 byte brightness = 5;                  // Display brightness, initially dim
 
+byte tempI;
 
 
 

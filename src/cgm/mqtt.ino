@@ -42,10 +42,6 @@ void reconnect() {
       Serial.print(F("Subscribing to "));
       Serial.println(trendTopic);
 
-///      Client.subscribe(dateTopic);
-///      Serial.print(F("Subscribing to "));
-///      Serial.println(dateTopic);
-
       Client.subscribe(timeTopic);
       Serial.print(F("Subscribing to "));
       Serial.println(timeTopic);
