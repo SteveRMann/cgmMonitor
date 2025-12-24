@@ -75,9 +75,9 @@ void blinkr(int n) {
   n = constrain(n, 0, 10);        // n must be between 0-10
   for (int i = 0; i < n; i++) {
     digitalWrite(ledPin, ledON);
-    delay(25);
+    delay(15);
     digitalWrite(ledPin, ledOFF);
-    delay(200);
+    delay(300);
   }
 }
 
