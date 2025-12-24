@@ -20,9 +20,10 @@ void loop() {
   }
 
 
+  // If charging, blink the LED every three seconds.
   static unsigned long lastBlink = 0;
   if (charging) {
-    if (millis() - lastBlink >= 2000) {
+    if (millis() - lastBlink >= 3000) {
       lastBlink = millis();
       runChargingBlink();
     }

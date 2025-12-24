@@ -50,7 +50,7 @@ void runChargingBlink() {
   */
 
   if (batteryPercent < 25) {
-    // 0-24%, Blink once for 10ms
+    // 0-24%, Blink once
     blinkr(1);
   }
 
@@ -75,7 +75,7 @@ void blinkr(int n) {
   n = constrain(n, 0, 10);        // n must be between 0-10
   for (int i = 0; i < n; i++) {
     digitalWrite(ledPin, ledON);
-    delay(100);
+    delay(25);
     digitalWrite(ledPin, ledOFF);
     delay(200);
   }
