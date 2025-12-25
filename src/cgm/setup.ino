@@ -6,7 +6,7 @@ void setup() {
   Serial.println(__FILE__);
 
   pinMode(ledPin, OUTPUT);                  // LedPin is an indicator that an MQTT message was received.
-  digitalWrite(ledPin, ledOFF);
+  analogWrite(ledPin, 0);
 
   setup_wifi();
   ///start_OTA();
@@ -43,7 +43,7 @@ void setup() {
   timeDisplay.setBrightness(brightness);
 
 
-  digitalWrite(ledPin, ledON);
+  analogWrite(ledPin, ledBrightness);
   //  lightAllSegments();       // Light up all segments
   //  showNumbers();            // Show the digits, 0-9
   //  showLetters();            // Show all letters.
@@ -57,7 +57,7 @@ void setup() {
   timeDisplay.writeDisplay();
   bgDisplay.clear();
   bgDisplay.writeDisplay();
-  digitalWrite(ledPin, ledOFF);
+  analogWrite(ledPin, 0);
 
    randomSeed(micros());
 }

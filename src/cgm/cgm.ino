@@ -61,8 +61,10 @@ const int ledON  = HIGH;
 const int ledOFF = LOW;
 bool charging = false;                // Set in MQTT callback if the phone battery is charging
 unsigned long chargeBlinkTimer = 0;
-bool chargeBlinkState = false;   // false = LED OFF, true = LED ON
+bool chargeBlinkState = false;        // false = LED OFF, true = LED ON
 int batteryPercent = 0;               // Battery charge in percent
+int ledBrightness = 100;              // PWM 0–1023, lower = dimmer
+    
 
 
 //---------------- Global Vars -------------------------

@@ -63,7 +63,7 @@ void reconnect() {
       Serial.println(F("====================="));
 
     } else {
-      //digitalWrite(ledPin, ledOFF);
+      //analogWrite(ledPin, 0);
       Serial.print(F("failed, rc="));
       Serial.print(String(Client.state()));
       Serial.println(F(" try again in 5 seconds"));

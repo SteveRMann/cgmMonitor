@@ -90,6 +90,12 @@ void callback(String topic, byte * message, unsigned int length) {
     brightness = messageString.toInt();
     timeDisplay.setBrightness(brightness);
     bgDisplay.setBrightness(brightness);
+    //Adjust the battery charge indicator
+    if (brightness == 0) {
+      ledBrightness = 100;              // PWM 0–1023, lower = dimmer
+    } else {
+      ledBrightness = 640;              // PWM 0–1023, lower = dimmer
+    }
   }
 
 
@@ -175,11 +181,11 @@ void callback(String topic, byte * message, unsigned int length) {
     }
     else if (messageString == "FULL") {
       charging = false;
-      digitalWrite(ledPin, ledON);
+      analogWrite(ledPin, ledBrightness);
     }
     else if (messageString == "DISCHARGING") {
       charging = false;
-      digitalWrite(ledPin, ledOFF);
+      analogWrite(ledPin, 0);
     }
     else {
       charging = false;
