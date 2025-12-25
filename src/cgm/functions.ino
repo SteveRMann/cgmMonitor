@@ -23,14 +23,14 @@ void beginSerial() {
   if (!chargeBlinkState) {
     // LED is OFF — wait 900ms
     if (now - chargeBlinkTimer >= 900) {
-      analogWrite(ledPin, ledBrightness);
+      analogWrite(ledPin6, ledBrightness);
       chargeBlinkState = true;
       chargeBlinkTimer = now;
     }
   } else {
     // LED is ON — wait 100ms
     if (now - chargeBlinkTimer >= 100) {
-      analogWrite(ledPin, 0);
+      analogWrite(ledPin6, 0);
       chargeBlinkState = false;
       chargeBlinkTimer = now;
     }
@@ -68,16 +68,17 @@ void runChargingBlink() {
     // 75-99%, Blink four times
     blinkr(4);
   }
-  analogWrite(ledPin, 0);   // ensure LED is fully off
+  analogWrite(ledPin5, 0);   // ensure LED is fully off
+  analogWrite(ledPin6, 0);   // ensure LED is fully off
 }
 
 /*
   void blinkr(int n) {
   n = constrain(n, 0, 10);        // n must be between 0-10
   for (int i = 0; i < n; i++) {
-    analogWrite(ledPin, ledBrightness);
+    analogWrite(ledPin6, ledBrightness);
     delay(15);
-    analogWrite(ledPin, 0);
+    analogWrite(ledPin6, 0);
     delay(300);
   }
   }
@@ -87,9 +88,11 @@ void blinkr(int n) {
   n = constrain(n, 0, 10);
 
   for (int i = 0; i < n; i++) {
-    analogWrite(ledPin, ledBrightness);  // PWM ON
+    analogWrite(ledPin5, ledBrightness);  // PWM ON
+    analogWrite(ledPin6, ledBrightness);  // PWM ON
     delay(15);
-    analogWrite(ledPin, 0);              // PWM OFF
+    analogWrite(ledPin5, 0);              // PWM OFF
+    analogWrite(ledPin6, 0);              // PWM OFF
     delay(350);
   }
 }

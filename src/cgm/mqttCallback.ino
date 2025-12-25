@@ -181,11 +181,13 @@ void callback(String topic, byte * message, unsigned int length) {
     }
     else if (messageString == "FULL") {
       charging = false;
-      analogWrite(ledPin, ledBrightness);
+      analogWrite(ledPin5, ledBrightness);
+      analogWrite(ledPin6, ledBrightness);
     }
     else if (messageString == "DISCHARGING") {
       charging = false;
-      analogWrite(ledPin, 0);
+      analogWrite(ledPin5, 0);
+      analogWrite(ledPin6, 0);
     }
     else {
       charging = false;

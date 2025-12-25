@@ -1,5 +1,5 @@
 #define SKETCH __FILE__
-#define VERSION "6.00"           // Four characters
+#define VERSION "6.02"           // Four characters
 #define hostPrefix "CGM-"        // Six characters max
 
 #define DEBUG true               // set to true for debug output, false for no debug ouput
@@ -9,6 +9,8 @@
   Github Repository local location: E:\cgmMonitor
 
   Version 6.00 (12/22/25) Added topics for battery charge level and state
+          6.01 (12/24/25) Changed battery LED to PWM
+          6.02 (12/24/25) Added D5. Some PCBs use D5 and some use D6
   
   IDE settings:
     NodeMCU 1.0 (ESP-12E Module), 4M, 1M SPIFFS
@@ -56,7 +58,8 @@ char hostName[12];        // Holds hostNamePrefix + the last three bytes of the 
 
 
 //---------------- LED Blink ------------------------------
-const int ledPin = D6;
+const int ledPin6 = D6;               // There are two versions of this PCB.
+const int ledPin5 = D5;               // Some have the LED on D5 and some on D6
 const int ledON  = HIGH;
 const int ledOFF = LOW;
 bool charging = false;                // Set in MQTT callback if the phone battery is charging
